@@ -66,13 +66,16 @@ public class SongIntegrationTest {
     public void searchForSongByID_returnsSong() throws Exception {
 
         //act
-        ResponseEntity<Song> response = restTemplate.getForEntity("/song/4", Song.class);
-        Song song = response.getBody();
+        ResponseEntity<Song[]> getSongId = restTemplate.getForEntity("/songs/Billie Jean", Song[].class);
+        Song song = getSongId.getBody()[0];
+
+        ResponseEntity<Song> response = restTemplate.getForEntity("/song/"+song.getId(), Song.class);
+        Song songById = response.getBody();
 
         //assert
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(song.getTitle()).contains("Billie Jean");
-        assertThat(song.getArtist()).contains("Michael Jackson");
+        assertThat(songById.getTitle()).contains("Billie Jean");
+        assertThat(songById.getArtist()).contains("Michael Jackson");
 
     }
 }

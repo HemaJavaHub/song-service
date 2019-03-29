@@ -10,6 +10,7 @@ import java.time.Duration;
 @Entity
 public class Song implements Serializable {
 
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -28,6 +29,14 @@ public class Song implements Serializable {
 		this.title = title;
 		this.artist = artist;
 		this.length = length;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
